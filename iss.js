@@ -12,4 +12,16 @@ const fetchMyIP = function(responseHandler) {
   });
 };
 
-module.exports = { fetchMyIP };
+const fetchCoordsByIP = function(IP, responseHandler) {
+  request(`https://freegeoip.app/json/${IP}`, (error, response, body) => {
+    if (error) {
+      return responseHandler(error, null);
+    } else if (response.statusCode !== 200) {
+      return responseHandler(Error(`Status code: ${response.statusCode}. Response: ${body}`), null);
+    }
+    const data = JSON.parse(body);
+    return responseHandler(null, { lat: data.latitude, lon: data.longitude });
+  });
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIP };
