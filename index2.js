@@ -1,7 +1,7 @@
 const { nextISSTimesForMyLocation } = require('./iss_promised');
 
 const printPassTimes = function(passTimes) {
-  for (passTime of passTimes) {
+  for (const passTime of passTimes) {
     console.log(passTime);
   }
 };
