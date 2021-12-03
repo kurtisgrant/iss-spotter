@@ -33,7 +33,8 @@ const fetchISSFlyOverTimes = function(coords, responseHandler) {
     }
     const data = JSON.parse(body).response;
     const readableData = data.map((time) => {
-      return `Next pass at ${new Date(time.risetime).toString()} for ${time.duration}`;
+      const date = new Date(time.risetime * 1000);
+      return `The ISS will pass at ${date.toLocaleTimeString()} on ${date.toLocaleDateString()} for ${time.duration} seconds!`;
     });
     return responseHandler(null, readableData);
   });
